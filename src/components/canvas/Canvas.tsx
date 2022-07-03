@@ -1,17 +1,24 @@
 // library
-import {useEffect, useRef} from 'react'
+import { useEffect, useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import Application, { MonitoringParams } from '../../application/Application'
 import Bezier from '../../application/Bezier'
 
 // Components
+import { addEntity } from '../../store/global/globalSlice'
 
 // Store
 
 // Styles
 
+// Types
+import { RootState } from '../../store'
+
 
 const Canvas = () => {
+    const entity = useSelector( ( state: RootState ) => state.globalSlice.entity )
     const canvasRef = useRef<HTMLDivElement>( null )
+    const dispatch = useDispatch()
 
     const startApplication = ( element: HTMLDivElement ) => {
         const app = new Application( element )
@@ -33,7 +40,10 @@ const Canvas = () => {
             ]
         } )
 
-        app.container.push( bezier )
+        dispatch( addEntity( bezier ) )
+
+        console.log( entity )
+        app.container.push( ...entity )
 
         let point: any = false
 
@@ -61,6 +71,7 @@ const Canvas = () => {
     }
 
     useEffect( () => {
+        console.log( entity )
         startApplication( canvasRef.current! )
     }, [] )
 

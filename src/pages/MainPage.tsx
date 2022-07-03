@@ -9,10 +9,15 @@ import Canvas from '../components/canvas/Canvas'
 
 
 const MainPage = () => {
+
+    const addPoint = ( event: MouseEvent ) => {
+        event.preventDefault()
+    }
+
     return (
         <section className="application">
             <div className="application__toolkit">
-                <button className="toolkit-button application__button">
+                <button onClick={ addPoint } className="toolkit-button toolkit-button_plus application__button">
                     +
                 </button>
             </div>
