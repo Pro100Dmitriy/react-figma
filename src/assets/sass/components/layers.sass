@@ -1,0 +1,29 @@
+@import ../base/variables
+    
+.layers 
+    position: fixed
+    top: 0
+    left: 0
+    z-index: $layer-z-index
+    padding: 10px
+    height: 100vh
+    width: 300px
+    overflow: hidden
+
+    &__container
+        width: calc(100% - 20px)
+        height: calc(100% - 20px)
+        background: white
+        border-radius: 10px
+        box-shadow: 1px 3px 30px rgba(black, .1)
+        overflow-x: hidden
+        overflow-y: auto
+
+    &__body
+        display: flex
+        flex-direction: column
+
+
+.entity
+    display: block
+    width: 100%

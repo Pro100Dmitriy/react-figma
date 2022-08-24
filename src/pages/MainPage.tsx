@@ -2,6 +2,7 @@
 
 // Components
 import Canvas from '../components/canvas/Canvas'
+import Layers from '../components/layers/Layers'
 
 // Store
 
@@ -20,6 +21,8 @@ const MainPage = () => {
                 <button onClick={ addPoint } className="toolkit-button toolkit-button_plus application__button">
                     +
                 </button>
+
+                <Layers/>
             </div>
             <div className="application__workspace">
                 <Canvas/>
