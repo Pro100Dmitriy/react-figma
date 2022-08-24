@@ -1,6 +1,7 @@
 import Camera from './Camera'
 import Canvas from './Canvas'
 import Mouse from './Mouse'
+import Select from './Select'
 
 
 type Timestamp = number
@@ -30,6 +31,7 @@ class Application implements IApplication {
     pTimestamp = 0
     mouse
     camera
+    select
 
     constructor( element: HTMLDivElement ) {
         this.canvas = new Canvas( {
@@ -41,6 +43,7 @@ class Application implements IApplication {
 
         this.mouse = new Mouse( this.canvas.element )
         this.camera = new Camera()
+        this.select = new Select( this.canvas )
 
         this.resize()
         window.addEventListener( 'resize', () => this.resize() )
@@ -63,6 +66,10 @@ class Application implements IApplication {
             } else {
                 this.camera.changeScale( this.mouse.delta )
             }
+        }
+
+        if( this.select.enable ) {
+            console.log( 'start select' )
         }
 
         const diff = timestamp - this.pTimestamp

@@ -23,7 +23,7 @@ export interface IBezier {
 
 class Bezier implements IBezier {
     step = 0
-    nodes = []
+    nodes: Point[] = []
 
     constructor( params: BezierParams ) {
         this.step = params.step

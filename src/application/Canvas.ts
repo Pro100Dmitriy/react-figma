@@ -18,16 +18,22 @@ type GridParam = {
 }
 
 type LineParams = {
-    x1: Coords,
-    y1: Coords,
-    x2: Coords,
-    y2: Coords,
+    x1: Coords
+    y1: Coords
+    x2: Coords
+    y2: Coords
+    appearance: Appearance
+}
+
+type SelectParam = {
+    start: Point
+    end: Point
     appearance: Appearance
 }
 
 type CircleParams = {
     point: Point
-    radius: number,
+    radius: number
     appearance: Appearance
 }
 
@@ -71,6 +77,25 @@ class Canvas implements ICanvas {
         context.fillStyle = this.background
         context.rect( 0, 0, this.element.width, this.element.height )
         context.fill()
+    }
+
+    drawSelect( param: SelectParam ) {
+        const { context } = this
+
+        const { start, end, appearance } = param
+
+        context.beginPath()
+        context.rect( start.x, start.y, end.x, end.y )
+
+        if( appearance.style === 'fill' ) {
+            context.fillStyle = appearance.color
+            context.fill()
+        }
+
+        if( appearance.style === 'stroke' ) {
+            context.strokeStyle = appearance.color
+            context.stroke()
+        }
     }
 
     drawCircle( param: CircleParams ) {

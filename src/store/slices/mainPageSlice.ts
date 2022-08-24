@@ -1,5 +1,6 @@
 // library
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import Application from '../../application/Application'
 
 // Components
 
@@ -10,22 +11,24 @@ import type { RootState } from '../'
 
 
 interface IMainPageSlice {
-
+    entity: any
 }
 
 const initialState: IMainPageSlice = {
-
+    entity: []
 }
 
 const mainPageSlice = createSlice( {
     name: 'mainPage',
     initialState,
     reducers: {
-
+        addEntity: ( state, action ) => {
+            state.entity = [ ...state.entity, action.payload ]
+        }
     }
 } )
 
 const { actions, reducer } = mainPageSlice
 
-export const {  } = actions
+export const { addEntity } = actions
 export default reducer
