@@ -5,8 +5,9 @@ export type Color = string
 export type Coords = number
 
 type Appearance = {
-    style: 'fill' | 'stroke',
+    style: 'fill' | 'stroke' | 'multiple'
     color: Color
+    multiple?: any
 }
 
 type GridParam = {
@@ -28,7 +29,7 @@ type LineParams = {
 type SelectParam = {
     start: Point
     end: Point
-    appearance: Appearance
+    appearance: any
 }
 
 type CircleParams = {
@@ -87,15 +88,11 @@ class Canvas implements ICanvas {
         context.beginPath()
         context.rect( start.x, start.y, end.x, end.y )
 
-        if( appearance.style === 'fill' ) {
-            context.fillStyle = appearance.color
-            context.fill()
-        }
-
-        if( appearance.style === 'stroke' ) {
-            context.strokeStyle = appearance.color
-            context.stroke()
-        }
+        context.fillStyle = appearance.multiple.background
+        context.fill()
+        
+        context.strokeStyle = appearance.multiple.borderColor
+        context.stroke()
     }
 
     drawCircle( param: CircleParams ) {

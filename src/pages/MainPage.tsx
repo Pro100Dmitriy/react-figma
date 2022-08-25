@@ -74,9 +74,13 @@ const MainPage = () => {
                     let y = ( application.mouse.y - application.camera.offsetY ) / application.camera.scale
 
                     if ( start ) {
-                        end = { x, y }
-                        
-                        application.select.draw( start, end )
+                        end = {
+                            x: x - start.x,
+                            y: y - start.y
+                        }
+
+                        application.select.start = start
+                        application.select.end = end
                     }
 
                 }
@@ -89,6 +93,7 @@ const MainPage = () => {
                 point = false
                 start = null
                 application.select.enable = false
+                application.select.clear()
             }
 
             if( application.mouse.middle ) {
@@ -115,7 +120,7 @@ const MainPage = () => {
                     +
                 </button>
 
-                {/* <Layers/> */}
+                <Layers/>
             </div>
             <div className="application__workspace">
                 <div

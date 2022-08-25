@@ -4,24 +4,43 @@ import { Point } from "./Bezier"
 
 export interface ISelect {
     enable: boolean
-    canvas: Canvas
+    start: Point
+    end: Point
     
-    draw: ( start: Point, end: Point ) => void
+    draw: ( canvas: Canvas ) => void
+    clear: () => void
 }
 
 class Select implements ISelect {
     enable: boolean = false
-    canvas: Canvas
+    start: Point = {
+        x: 0,
+        y: 0
+    }
+    end: Point = {
+        x: 0,
+        y: 0
+    }
+    background: string = 'rgba(0, 209, 255, 0.08)'
+    borderColor: string = '#00A3FF'
 
-    constructor ( canvas: Canvas ) {
-        this.canvas = canvas
+    draw ( canvas: Canvas ) {
+        canvas.drawSelect( { 
+            start: this.start, 
+            end: this.end,
+            appearance: {
+                style: 'multiple',
+                multiple: {
+                    background: this.background,
+                    borderColor: this.borderColor
+                }
+            }
+        } )
     }
 
-    draw ( start: Point, end: Point ) {
-        this.canvas.drawSelect( { start, end, appearance: {
-            style: 'fill',
-            color: 'black'
-        } } )
+    clear () {
+        this.start = { x: 0, y: 0 }
+        this.end = { x: 0, y: 0 }
     }
 }
 

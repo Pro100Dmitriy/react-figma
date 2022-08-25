@@ -1,3 +1,4 @@
+import { runInThisContext } from 'vm'
 import Camera from './Camera'
 import Canvas from './Canvas'
 import Mouse from './Mouse'
@@ -43,7 +44,7 @@ class Application implements IApplication {
 
         this.mouse = new Mouse( this.canvas.element )
         this.camera = new Camera()
-        this.select = new Select( this.canvas )
+        this.select = new Select()
 
         this.resize()
         window.addEventListener( 'resize', () => this.resize() )
@@ -69,7 +70,11 @@ class Application implements IApplication {
         }
 
         if( this.select.enable ) {
-            console.log( 'start select' )
+            if( !this.container.find( element => this.select === element ) ) {
+                this.container.push( this.select )
+            }
+
+            console.log( this.container )
         }
 
         const diff = timestamp - this.pTimestamp
